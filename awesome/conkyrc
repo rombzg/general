@@ -1,0 +1,44 @@
+alignment bottom
+background no
+border_width 0
+cpu_avg_samples 2
+default_color 888888
+default_outline_color 222222
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+use_xft yes
+xftfont Sans Mono:size=8
+gap_x 5
+gap_y 0
+minimum_size 1910
+maximum_width 1910
+net_avg_samples 2
+no_buffers yes
+out_to_console no
+out_to_stderr no
+extra_newline no
+own_window no
+own_window_class Conky
+own_window_type desktop
+own_window_transparent yes
+stippled_borders 0
+update_interval 1.0
+uppercase no
+use_spacer left
+show_graph_scale no
+show_graph_range no
+double_buffer yes
+
+color0 222222
+color1 666666
+color2 888888
+color3 444444
+color4 00DC3B
+color5 00900A
+color6 930000
+
+TEXT
+${kernel}${sysname} [${color1}${fs_used}/${fs_size}${color}] ${color4}${fs_used_perc}${color}% ${color0}${diskiograph 10,50 000000 ff0000 -t}${color}  ${uptime} \
+${alignr}${color5}${upspeed wlo1}${color}/${color6}${downspeed wlo1}${color} | ${color5}${totalup wlo1}${color}/${color6}${totaldown wlo1}${color} ${color4}${wireless_link_qual_perc wlo1}${color}% [${color1}${addr wlo1}${color}] ${wireless_essid wlo1}
