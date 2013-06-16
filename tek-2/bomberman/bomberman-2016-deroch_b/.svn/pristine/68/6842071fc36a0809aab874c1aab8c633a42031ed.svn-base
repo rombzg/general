@@ -1,0 +1,199 @@
+/*
+** main.cpp for Bomberman in /home/benj/Projets/tek2/cpp/bomberman
+** 
+** Made by benjamin deroche
+** Login   <deroch_b@epitech.net>
+** 
+** Started on  Mon Feb 11 12:38:07 2013 benjamin deroche
+** Last update Sun Feb 23 19:25:42 2013 benjamin deroche
+*/
+
+#include	"Object.hh"
+
+namespace	Primitive
+{
+  void		Triangle::initialize()
+  {
+
+  }
+
+  void		Triangle::update(__attribute__((__unused__))gdl::GameClock const & gameClock, __attribute__((__unused__))gdl::Input & input)
+  {
+
+  }
+
+  void		Triangle::draw()
+  {
+    glPushMatrix();
+    glTranslatef(this->_position.x, this->_position.y, this->_position.z);
+    glRotatef(this->_rotation.x, 1, 0, 0);
+    glRotatef(this->_rotation.y, 0, 1, 0);
+    glRotatef(this->_rotation.z, 0, 0, 1);
+    glBegin(GL_TRIANGLES);
+    glColor3f(1.0f, 0.50f, 0.75f);
+    glVertex3f(0.0f, 150.0f, 0.0f);
+    glVertex3f(-150.0f, 0.0f, 0.0f);
+    glVertex3f(150.0f, 0.0f, 0.0f);
+    glEnd();
+    glPopMatrix();
+  }
+
+  void		Rectangle::initialize()
+  {
+    this->_texture = gdl::Image::load("assets/textures/wall.png");
+  }
+
+  void		Rectangle::update(__attribute__((__unused__))gdl::GameClock const & gameClock, __attribute__((__unused__))gdl::Input & input)
+  {
+    
+  }
+
+  void		Rectangle::draw()
+  {
+    glPushMatrix();
+    glTranslatef(this->_position.x, this->_position.y, this->_position.z);
+    glRotatef(this->_rotation.x, 1, 0, 0);
+    glRotatef(this->_rotation.y, 0, 1, 0);
+    glRotatef(this->_rotation.z, 0, 0, 1);
+    this->_texture.bind();
+    glBegin(GL_QUADS);
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(-150.0f, 100.0f, 0.0f);
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(-150.0f, -100.0f, 0.0f);
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex3f(150.0f, -100.0f, 0.0f);
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(150.0f, 100.0f, 0.0f);
+    glEnd();
+    glPopMatrix();
+  }
+}
+
+namespace	Object
+{
+  void		Cube::initialize()
+  {
+    this->_texture = gdl::Image::load("assets/textures/wall.png");
+  }
+
+  void		Cube::update(__attribute__((__unused__))gdl::GameClock const & gameClock, gdl::Input & input)
+  {
+    if (input.isKeyDown(gdl::Keys::Right) == true)      
+      this->_rotation.y = ((int)_rotation.y + 1) % 360;
+    if (input.isKeyDown(gdl::Keys::Left) == true)      
+      this->_rotation.y = ((int)_rotation.y - 1) % 360;
+  }
+
+  void		Cube::draw()
+  {
+    glPushMatrix();
+    glLoadIdentity();
+    glTranslatef(this->_position.x, this->_position.y, this->_position.z);
+    glRotatef(this->_rotation.x, 1.0f, 0.0f, 0.0f);
+    glRotatef(this->_rotation.y, 0.0f, 1.0f, 0.0f);
+    glRotatef(this->_rotation.z, 0.0f, 0.0f, 1.0f);
+    this->_texture.bind();
+    glBegin(GL_QUADS);
+
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(-150.0f, 150.0f, 150.0f);
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(-150.0f, -150.0f, 150.0f);
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex3f(150.0f, -150.0f, 150.0f);
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(150.0f, 150.0f, 150.0f);
+
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(-150.0f, 150.0f, -150.0f);
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(-150.0f, -150.0f, -150.0f);
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex3f(-150.0f, -150.0f, 150.0f);
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(-150.0f, 150.0f, 150.0f);
+
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(150.0f, 150.0f, -150.0f);
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(150.0f, -150.0f, -150.0f);
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex3f(-150.0f, -150.0f, -150.0f);
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(-150.0f, 150.0f, -150.0f);
+
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(150.0f, 150.0f, 150.0f);
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(150.0f, -150.0f, 150.0f);
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex3f(150.0f, -150.0f, -150.0f);
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(150.0f, 150.0f, -150.0f);
+
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(150.0f, 150.0f, 150.0f);
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(-150.0f, 150.0f, 150.0f);
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex3f(-150.0f, 150.0f, -150.0f);
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(150.0f, 150.0f, -150.0f);
+
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(150.0f, -150.0f, 150.0f);
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(-150.0f, -150.0f, 150.0f);
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex3f(-150.0f, -150.0f, -150.0f);
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(150.0f, -150.0f, -150.0f);
+
+    glEnd();
+    glPopMatrix();
+  }
+
+  void		Pyramide::initialize()
+  {
+    
+  }
+
+  void		Pyramide::update(__attribute__((__unused__))gdl::GameClock const & gameClock, __attribute__((__unused__))gdl::Input & input)
+  {
+    this->_rotation.y = ((int)_rotation.y + 1) % 360;
+  }
+
+  void		Pyramide::draw()
+  {
+    glPushMatrix();
+    glLoadIdentity();    
+    glTranslatef(0.0f, 0.0f, -900.0f);
+    glRotatef(this->_rotation.y, 0.0f, 1.0f, 0.0f);
+    glBegin(GL_TRIANGLES);
+
+    glColor3f(1.0f, 1.0f, 1.0f);
+    glVertex3f(0.0f, -150.0f, -150.0f);
+    glVertex3f(-150.0f, -150.0f, 150.0f);
+    glVertex3f(150.0f, -150.0f, 150.0f);
+
+    glColor3f(1.0f, 0.0f, 1.0f);
+    glVertex3f(0.0f, 150.0f, 0.0f);
+    glVertex3f(-150.0f, -150.0f, 150.0f);
+    glVertex3f(150.0f, -150.0f, 150.0f);
+
+    glColor3f(0.0f, 1.0f, 0.0f);
+    glVertex3f(0.0f, 150.0f, 0.0f);
+    glVertex3f(0.0f, -150.0f, -150.0f);
+    glVertex3f(-150.0f, -150.0f, 150.0f);
+
+    glColor3f(0.0f, 0.0f, 1.0f);
+    glVertex3f(0.0f, 150.0f, 0.0f);
+    glVertex3f(150.0f, -150.0f, 150.0f);
+    glVertex3f(0.0f, -150.0f, -150.0f);
+
+    glEnd();
+
+    glPopMatrix();
+  }
+}

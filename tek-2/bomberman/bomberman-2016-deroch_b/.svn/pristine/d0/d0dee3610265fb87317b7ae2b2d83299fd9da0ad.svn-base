@@ -1,0 +1,67 @@
+/*
+** main.cpp for Bomberman in /home/benj/Projets/tek2/cpp/bomberman
+** 
+** Made by benjamin deroche
+** Login   <deroch_b@epitech.net>
+** 
+** Started on  Mon Feb 11 12:38:07 2013 benjamin deroche
+** Last update Sun Feb 23 19:25:42 2013 benjamin deroche
+*/
+
+#include	"Map.hh"
+
+Map::Map()
+{
+
+}
+
+void		Map::initialize(int xs, int ys)
+{
+  Block		*b;
+  int		x;
+  int		y;
+
+  _x_size = xs;
+  _y_size = ys;
+  for (x = 0; x < _x_size; x++)
+    {
+      for (y = 0; y < _y_size; y++)
+	{
+	  b = new Block(x, y);
+	  b->initialize();
+	  if (x % 2 && y % 2)
+	    b->setType(Block::WALL);
+	  else if (rand() % 4 < 1)
+	    b->setType(Block::BLOCK);
+	  else
+	    b->setType(Block::EMPTY);
+	  _block_list.push_back(b);
+	}
+    }
+}
+
+void		Map::draw()
+{
+  int		size;
+  int		i;
+
+  size = _x_size * _y_size;
+  for (i = 0; i < size; i++)
+    _block_list[i]->draw();
+}
+
+bool		Map::isEmptyPos(float posx, float posy)
+{
+  int		x;
+  int		y;
+  int		i;
+
+  x = int(posx) / 300;
+  y = int(posy) / 300;
+  if (x >= 0 && y >= 0 && x < _x_size && y < _y_size)
+    {
+      i = x * _x_size + y;
+      return (_block_list[i]->isEmpty());
+    }
+  return (false);
+}

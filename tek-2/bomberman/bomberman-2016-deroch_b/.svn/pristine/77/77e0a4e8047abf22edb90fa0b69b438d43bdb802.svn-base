@@ -1,0 +1,164 @@
+#include	"Block.hh"
+
+Block::Block(int x, int y) : AObject((float)x * 300.0f, (float)y * 300.0f, 0.0f)
+{
+
+}
+
+void		Block::initialize()
+{
+  _onFire = false;
+}
+
+void		Block::update(gdl::GameClock const &, gdl::Input &)
+{
+
+}
+
+void		Block::draw()
+{
+  glPushMatrix();
+  glTranslatef(_position.x, _position.y, _position.z);
+  glRotatef(_rotation.x, 1, 0, 0);
+  glRotatef(_rotation.y, 0, 1, 0);
+  glRotatef(_rotation.z, 0, 0, 1);
+  _texture.bind();
+  glBegin(GL_QUADS);
+
+  glTexCoord2f(0.0f, 0.0f);
+  glVertex3f(150.0f, 150.0f, -150.0f);
+  glTexCoord2f(0.0f, 1.0f);
+  glVertex3f(150.0f, -150.0f, -150.0f);
+  glTexCoord2f(1.0f, 1.0f);
+  glVertex3f(-150.0f, -150.0f, -150.0f);
+  glTexCoord2f(1.0f, 0.0f);
+  glVertex3f(-150.0f, 150.0f, -150.0f);
+
+  if (_type == Block::BLOCK || _type == Block::WALL)
+    {
+      glTexCoord2f(0.0f, 0.0f);
+      glVertex3f(-150.0f, 150.0f, 150.0f);
+      glTexCoord2f(0.0f, 1.0f);
+      glVertex3f(-150.0f, -150.0f, 150.0f);
+      glTexCoord2f(1.0f, 1.0f);
+      glVertex3f(150.0f, -150.0f, 150.0f);
+      glTexCoord2f(1.0f, 0.0f);
+      glVertex3f(150.0f, 150.0f, 150.0f);
+
+      glTexCoord2f(0.0f, 0.0f);
+      glVertex3f(-150.0f, 150.0f, -150.0f);
+      glTexCoord2f(0.0f, 1.0f);
+      glVertex3f(-150.0f, -150.0f, -150.0f);
+      glTexCoord2f(1.0f, 1.0f);
+      glVertex3f(-150.0f, -150.0f, 150.0f);
+      glTexCoord2f(1.0f, 0.0f);
+      glVertex3f(-150.0f, 150.0f, 150.0f);
+
+      glTexCoord2f(0.0f, 0.0f);
+      glVertex3f(150.0f, 150.0f, 150.0f);
+      glTexCoord2f(0.0f, 1.0f);
+      glVertex3f(150.0f, -150.0f, 150.0f);
+      glTexCoord2f(1.0f, 1.0f);
+      glVertex3f(150.0f, -150.0f, -150.0f);
+      glTexCoord2f(1.0f, 0.0f);
+      glVertex3f(150.0f, 150.0f, -150.0f);
+
+      glTexCoord2f(0.0f, 0.0f);
+      glVertex3f(150.0f, 150.0f, 150.0f);
+      glTexCoord2f(0.0f, 1.0f);
+      glVertex3f(-150.0f, 150.0f, 150.0f);
+      glTexCoord2f(1.0f, 1.0f);
+      glVertex3f(-150.0f, 150.0f, -150.0f);
+      glTexCoord2f(1.0f, 0.0f);
+      glVertex3f(150.0f, 150.0f, -150.0f);
+
+      glTexCoord2f(0.0f, 0.0f);
+      glVertex3f(150.0f, -150.0f, 150.0f);
+      glTexCoord2f(0.0f, 1.0f);
+      glVertex3f(-150.0f, -150.0f, 150.0f);
+      glTexCoord2f(1.0f, 1.0f);
+      glVertex3f(-150.0f, -150.0f, -150.0f);
+      glTexCoord2f(1.0f, 0.0f);
+      glVertex3f(150.0f, -150.0f, -150.0f);
+    }
+
+  glEnd();
+  glPopMatrix();
+}
+
+float	 	Block::getXPos() const
+{
+  return (_position.x);
+}
+
+float	 	Block::getYPos() const
+{
+  return (_position.x);
+}
+
+float	 	Block::getZPos() const
+{
+  return (_position.x);
+}
+
+float	 	Block::getXRot() const
+{
+  return (_rotation.x);
+}
+
+float	 	Block::getYRot() const
+{
+  return (_rotation.y);
+}
+
+float	 	Block::getZRot() const
+{
+  return (_rotation.z);
+}
+
+float		Block::getTimer() const
+{
+  return (_timer);
+}
+
+void		Block::setPos(float x, float y, float z)
+{
+  _position.x = x;
+  _position.y = y;
+  _position.z = z;
+}
+
+void		Block::setRot(float x, float y, float z)
+{
+  _rotation.x = x;
+  _rotation.y = y;
+  _rotation.z = z;
+}
+
+void		Block::setType(e_type t)
+{
+  _type = t;
+  if (t == Block::BLOCK)
+    _texture = gdl::Image::load("assets/textures/block.png");
+  else if (t == Block::WALL)
+    _texture = gdl::Image::load("assets/textures/wall.png");
+  else if (t == Block::EMPTY)
+    _texture = gdl::Image::load("assets/textures/floor.png");
+  else
+    _texture = gdl::Image::load("assets/textures/fire.png");
+}
+
+bool		Block::isEmpty() const
+{
+  return (_type == Block::EMPTY ? true : false);
+}
+
+bool		Block::isWall() const
+{
+  return (_type == Block::WALL ? true : false);
+}
+
+bool		Block::isBlock() const
+{
+  return (_type == Block::BLOCK ? true : false);
+}

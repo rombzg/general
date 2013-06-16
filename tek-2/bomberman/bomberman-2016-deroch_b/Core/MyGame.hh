@@ -1,0 +1,39 @@
+/*
+** main.cpp for Bomberman in /home/benj/Projets/tek2/cpp/bomberman
+** 
+** Made by benjamin deroche
+** Login   <deroch_b@epitech.net>
+** 
+** Started on  Mon Feb 11 12:38:07 2013 benjamin deroche
+** Last update Sun Feb 23 19:25:42 2013 benjamin deroche
+*/
+
+#ifndef			__MYGAME_HH__
+#define			__MYGAME_HH__
+
+#include		<list>
+#include		<Game.hpp>
+#include		"Camera.hh"
+#include		"AObject.hh"
+#include		"Map.hh"
+
+class			MyGame : public gdl::Game
+{
+private:
+  Camera		_camera;
+  std::list<AObject*>	_objects;
+  Map			_map;
+  int			_xs;
+  int			_ys;
+
+public:
+  void			initialize();
+  void			update();
+  void			draw();
+  void			unload();
+  void			addBombe(float x, float y);
+  void			setXS(int);
+  void			setYS(int);
+};
+
+#endif

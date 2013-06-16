@@ -1,0 +1,26 @@
+/*
+** main.cpp for Bomberman in /home/benj/Projets/tek2/cpp/bomberman
+** 
+** Made by benjamin deroche
+** Login   <deroch_b@epitech.net>
+** 
+** Started on  Mon Feb 11 12:38:07 2013 benjamin deroche
+** Last update Sun Feb 23 19:25:42 2013 benjamin deroche
+*/
+
+#include	<iostream>
+#include	<GL/gl.h>
+#include	<GL/glu.h>
+#include	"MyGame.hh"
+
+#include	<Clock.hpp>
+
+
+
+int		main(__attribute__((__unused__))int ac, __attribute__((__unused__))char **av)
+{
+  MyGame	game;
+
+  game.run();
+  return (0);
+}
