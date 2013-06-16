@@ -1,0 +1,6 @@
+#!/bin/bash
+echo Redémarrage de conky dans 2secs...
+sleep 2s
+cd /home/barbaz_r
+kill -9 $(pidof conky)
+conky -d

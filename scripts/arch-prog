@@ -1,0 +1,3 @@
+#!/bin/bash
+cd /home/barbaz_r
+sudo pacman -Sy alsa-oss alsa-utils ntfs-3g subversion openssh python qt pcmanfm oxygen-icons vfs gvfs-smb gvfs-afp emacs dropbox transmission-gtk google-chrome thunderbird conky firefox gimp vlc

@@ -1,0 +1,3 @@
+#!/bin/bash
+echo commande clean exécutée, fichiers temporaires supprimés...
+rm -f *~ *#

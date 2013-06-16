@@ -1,0 +1,3 @@
+#!/bin/bash
+cd /home/barbaz_r
+sudo pacman -Sy xorg-server xorg-xinit xorg-server-utils awesome xf86-video-nouveau xf86-input-synaptics xscreensaver wicd wicd-gtk terminator

@@ -1,0 +1,5 @@
+#!/bin/bash
+echo Démarrage de conky dans 2secs...
+sleep 2s
+cd /home/barbaz_r
+conky -d
